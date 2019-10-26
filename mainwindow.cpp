@@ -18,22 +18,19 @@ MainWindow::~MainWindow()
 
 
 class User{
-    int Age;
+    int age;
     QString name;
 public:
     static std::vector<User> users_;
     User(int age, QString name){
-        this->Age=age;
+        this->age=age;
         this->name=name;
     }
     QString getName(){
         return name;
     }
     int getAge(){
-        return Age;
-    }
-    void printName(){
-        qDebug() << name+" ";
+        return age;
     }
     static size_t getCount(){
         return  users_.size();
@@ -47,8 +44,10 @@ public:
     static void removeUserByName(QString name){
         users_.erase(std::remove_if(users_.begin(), users_.end(),[&](User found){return found.getName() == name;}), users_.end());
     }
-    static void printAllNames(){
-        std::for_each(users_.begin(),users_.end(),[&](User found){found.printName();});
+    static std::vector<QString> getAllNames(){
+        std::vector<QString> list;
+        std::for_each(users_.begin(),users_.end(),[&](User found){list.push_back(found.getName());});
+        return  list;
     }
 };
 
@@ -68,19 +67,19 @@ void MainWindow::on_submitPushButton_clicked()
 
     qDebug() << "Current students' count: " << User::getCount();
     qDebug() << "All students: ";
-    User::printAllNames();
+    qDebug() << User::getAllNames();
     qDebug() << "Removing user at 4 index";
 
     User::removeUserAt(4);
 
-    qDebug() << "Currenoit Students' Count: " << User::getCount();
+    qDebug() << "Current Students' Count: " << User::getCount();
     qDebug() << "All students: ";
-    User::printAllNames();
+    qDebug() << User::getAllNames();
     qDebug() << "Removing user named Aufar ";
 
     User::removeUserByName("Aufar");
 
     qDebug() << "Current Students' Count: " << User::getCount();
     qDebug() << "All students: ";
-    User::printAllNames();
+    qDebug() << User::getAllNames();
 }
