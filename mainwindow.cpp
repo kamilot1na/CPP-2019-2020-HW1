@@ -18,19 +18,19 @@ MainWindow::~MainWindow()
 
 
 class User{
-    int age;
-    QString name;
+    int age_;
+    QString name_;
 public:
     static std::vector<User> users_;
     User(int age, QString name){
-        this->age=age;
-        this->name=name;
+        this->age_=age;
+        this->name_=name;
     }
     QString getName(){
-        return name;
+        return name_;
     }
     int getAge(){
-        return age;
+        return age_;
     }
     static size_t getCount(){
         return  users_.size();
