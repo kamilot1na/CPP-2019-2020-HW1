@@ -40,6 +40,26 @@ public:
     static int getTotalCount(){
         return total_count;
     }
+    static void addUser(User user)
+    {
+        User::users_.push_back(user);
+    }
+    static void deleteUserOfIndex(int index)
+    {
+        users_.erase(users_.begin()+index);
+    }
+    static void deleteUserOfName(QString name)
+    {
+        for(unsigned long long i = 0 ; i < users_.size(); i++)
+        {
+            if(users_[i].getName() == name)
+                users_.erase(users_.begin() + i);
+        }
+    }
+    static int getCountOfUsers()
+    {
+        return(users_.size());
+    }
     static std::vector<User> users_;
 };
 
